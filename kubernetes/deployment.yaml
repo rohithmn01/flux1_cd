@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-deploy
+  labels:
+    app: portfolio-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio-app
+  template:
+    metadata:
+      labels:
+        app: portfolio-app
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: portfolio-app
+        image: rohithmn03/portfolio:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
